@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Generate editorial illustrations for business models
-Combines ImagineConcepts.md scene descriptions with ImageStyle.json specifications
+Generate editorial illustrations for business models - Version 2
+Combines ImagineConcepts.md scene descriptions with ImageStyle.json v1.1 specifications
+Enforces strict text policy: NO titles, NO watermarks, minimal text
 Uses Google Gemini Flash Image 2.5
 """
 
@@ -30,7 +31,7 @@ with open(STYLE_JSON, "r") as f:
     STYLE = style_data["style"]
     TEXT_POLICY = style_data["text_policy"]
 
-# Editorial concepts for first 10 models (extracted from ImagineConcepts.md)
+# Editorial concepts for first 10 models
 EDITORIAL_CONCEPTS = {
     1: {
         "name": "Add-On",
@@ -105,9 +106,9 @@ EDITORIAL_CONCEPTS = {
 }
 
 
-def create_editorial_prompt(model_number, concept, style):
+def create_editorial_prompt(model_number, concept, canvas, palette, style, text_policy):
     """
-    Create a sophisticated prompt combining editorial concept with vector style specs.
+    Create a sophisticated prompt with strict text policy enforcement.
     """
 
     name = concept["name"]
@@ -117,7 +118,7 @@ def create_editorial_prompt(model_number, concept, style):
     perspective = concept["perspective"]
 
     # Build comprehensive prompt
-    prompt = f"""Create an editorial magazine cover illustration for the business model: "{name}"
+    prompt = f"""Create an editorial magazine cover illustration for "{name}" business model.
 
 CORE CONCEPT: {essence}
 VISUAL METAPHOR: {metaphor}
@@ -125,61 +126,83 @@ VISUAL METAPHOR: {metaphor}
 SCENE DESCRIPTION:
 {scene}
 
-PERSPECTIVE & COMPOSITION:
-{perspective}
+PERSPECTIVE: {perspective}
 
-VISUAL STYLE SPECIFICATIONS:
+CANVAS & FORMAT:
+- Aspect ratio: {canvas["aspect_ratio"]} square format ({canvas["resolution"]})
+- Background: Pure white #{canvas["background_hex"][1:]}
+- Padding: {canvas["padding_pct"]}% margin on all sides for breathing room
 
-Color Palette:
-- Background: Pure white #{style["palette"]["background_hex"][1:]}
-- Primary elements: Black #{style["palette"]["primary_hex"][1:]}
-- Accent/highlights: Golden yellow #{style["palette"]["accent_hex"][1:]} (use sparingly for key elements only)
-- Secondary/shadows: Light grey #{style["palette"]["secondary_hex"][1:]}
+COLOR PALETTE (Use strictly):
+- Primary: Black #{palette["primary_hex"][1:]} for main elements, outlines, solid shapes
+- Accent: Golden yellow #{palette["accent_hex"][1:]} ONLY for 2-3 key focal elements
+- Neutral: Light grey #{palette["neutral_hex"][1:]} for shadows and subtle elements
 
-Rendering Style:
-- {style["rendering"]["texture"]} finish
-- {style["rendering"]["lighting"]}
-- {style["rendering"]["finish"]} surface quality
-- Flat vector illustration with minimal 3D depth
-- Clean, geometric forms with {style["lines"]["corner_type"]} corners
+RENDERING STYLE:
+- {style["rendering"]["texture"]} with {style["rendering"]["finish"]} finish
+- Lighting: {style["rendering"]["lighting"]} (no realistic shadows)
+- Drop shadows: {"Disabled" if not style["rendering"]["drop_shadows"] else "Enabled"}
+- Gradients: {"Disabled" if not style["rendering"]["gradients"] else "Enabled"}
+- Pure flat vector illustration with minimal depth
 
-Shading & Texture:
-- {style["shading"]["type"]} shading approach
-- {style["shading"]["contrast"]} contrast level
-- Halftone dot matrix pattern on shadows and side faces (medium density)
-- Use halftone sparingly to add texture without overwhelming the clean vector aesthetic
+HALFTONE TEXTURE (Apply sparingly):
+- Pattern: {style["halftone"]["pattern_type"]}
+- Dot size range: {style["halftone"]["dot_min_px"]}-{style["halftone"]["dot_max_px"]}px
+- Angle: {style["halftone"]["angle_deg"]}°
+- Density: {style["halftone"]["density"]}
+- Tint: #{style["halftone"]["tint_hex"][1:]}
+- Apply ONLY to: {", ".join(style["halftone"]["placement"])}
+- Keep subtle - not a dominant visual element
 
-Line Work:
-- Stroke weight: {style["lines"]["weight_px"]}px
-- {style["lines"]["style"]} lines
-- Arrow type: {style["lines"]["arrow_type"]} for directional indicators
-- Consistent line weight throughout
+LINE WORK:
+- Weight: {style["lines"]["weight_px"]}px consistent throughout
+- Style: {style["lines"]["style"]} strokes
+- Corners: {style["lines"]["corner_type"]}
+- Arrows (if needed): {style["lines"]["arrow_type"]}
 
-Composition:
-- {style["composition"]["layout"]} organization
-- {style["composition"]["balance"]} arrangement
-- {style["composition"]["object_depth"]} dimensionality
-- Generous white space
+COMPOSITION:
+- Layout: {style["composition"]["layout"]} arrangement
+- Balance: {style["composition"]["balance"]}
+- Depth: {style["composition"]["object_depth"]}
+- Spacing: {style["composition"]["spacing_pct"]}% between elements
+- Anchor to center: {style["composition"]["central_anchor"]}
 
-Technical Specifications:
-- 16:9 aspect ratio (2048x1152px)
-- Vector illustration aesthetic
-- Editorial magazine quality
-- Suitable for chapter cover or magazine spread
+TEXT POLICY - CRITICAL:
+✗ NO titles anywhere on the image
+✗ NO subtitles anywhere on the image
+✗ NO watermarks or signatures
+✗ NO text on background
+✓ Maximum {text_policy["max_characters_total"]} characters total (prefer ZERO)
+✓ Text ONLY allowed: tiny labels on tokens/arrows if absolutely essential
+✓ If any text: {text_policy["allowed_languages"]} only, spelled correctly, factually accurate
+✓ Font: {text_policy["font_family_hint"]}, {text_policy["font_weight"]} weight
+✓ PREFER pure visual communication - use symbols and metaphors instead of words
 
-CRITICAL STYLE RULES:
-1. Predominantly white background with black primary elements
-2. Use golden yellow accent ONLY for the most important 2-3 focal elements
-3. Apply halftone dots only to shadows and side faces for subtle texture
-4. Keep composition clean, uncluttered, sophisticated
-5. Isometric or slightly angled perspective for depth
-6. NO gradients, NO realistic rendering, NO photographs
-7. Pure vector illustration with flat colors and subtle halftone
-8. Think: The Economist, Monocle, Wired editorial illustrations
-9. Conceptual, metaphorical, intellectually sophisticated
+CRITICAL REQUIREMENTS:
+1. White background with black primary elements
+2. Golden yellow accent on 2-3 focal points ONLY
+3. Halftone dots on side faces and shadows ONLY (not everywhere)
+4. ZERO text preferred (max 20 chars if absolutely necessary)
+5. NO titles, NO watermarks anywhere
+6. Square 1:1 format ({canvas["aspect_ratio"]})
+7. NO gradients, NO realistic rendering, NO photographs
+8. Clean vector - think The Economist editorial style
+9. Visual metaphor communicates concept without text
+10. Generous white space, clean composition
+
+VALIDATION:
+□ Background is pure white?
+□ Primary elements are black with golden accents on key points only?
+□ Halftone used sparingly on shadows/sides only?
+□ Total text is 0-20 characters (ideally zero)?
+□ NO titles, subtitles, or watermarks present?
+□ Any text is spelled correctly and accurate?
+□ Composition is clean with {canvas["padding_pct"]}% margins?
+□ Visual metaphor is clear without text?
+□ Square 1:1 aspect ratio?
 
 OUTPUT:
-A clean, sophisticated editorial illustration that captures the business model essence through visual metaphor, rendered in a modern vector style with black primary elements on white background, golden accents on key focal points, and subtle halftone texture for depth."""
+A sophisticated editorial illustration communicating "{name}" through pure visual metaphor, minimal/zero text, clean vector style on white background, suitable for business book chapter cover."""
 
     return prompt
 
@@ -192,13 +215,13 @@ def generate_image(client, prompt, model_name, output_path):
         print(f"{'=' * 70}")
         print(f"Prompt length: {len(prompt)} characters")
 
-        # Generate image
+        # Generate image with 1:1 aspect ratio
         response = client.models.generate_content(
             model=MODEL_NAME,
             contents=[prompt],
             config=types.GenerateContentConfig(
                 response_modalities=["IMAGE"],
-                image_config=types.ImageConfig(aspect_ratio="16:9"),
+                image_config=types.ImageConfig(aspect_ratio="1:1"),
             ),
         )
 
@@ -241,16 +264,20 @@ def main():
     """Main execution function."""
 
     print("\n" + "=" * 70)
-    print("  EDITORIAL BUSINESS MODEL ILLUSTRATIONS")
-    print("  Vector Style | Magazine Cover Quality")
+    print("  EDITORIAL BUSINESS MODEL ILLUSTRATIONS v2")
+    print("  Clean Vector | NO Titles | Minimal Text")
     print("=" * 70)
 
     print(f"\nStyle Profile:")
-    print(f"  Background: White #{STYLE['palette']['background_hex'][1:]}")
-    print(f"  Primary: Black #{STYLE['palette']['primary_hex'][1:]}")
-    print(f"  Accent: Golden #{STYLE['palette']['accent_hex'][1:]}")
-    print(f"  Style: Flat vector with halftone texture")
-    print(f"  Composition: Isometric, clean, editorial")
+    print(f"  Format: {CANVAS['aspect_ratio']} square ({CANVAS['resolution']})")
+    print(f"  Background: White #{CANVAS['background_hex'][1:]}")
+    print(f"  Primary: Black #{PALETTE['primary_hex'][1:]}")
+    print(f"  Accent: Golden #{PALETTE['accent_hex'][1:]}")
+    print(
+        f"  Text Policy: {TEXT_POLICY['allowed']} (max {TEXT_POLICY['max_characters_total']} chars)"
+    )
+    print(f"  Titles: {'NO' if not TEXT_POLICY['titles'] else 'YES'}")
+    print(f"  Watermarks: {'NO' if not TEXT_POLICY['watermarks'] else 'YES'}")
     print()
 
     # Initialize Gemini client
@@ -268,8 +295,10 @@ def main():
         concept = EDITORIAL_CONCEPTS[i]
         model_name = concept["name"]
 
-        # Create prompt
-        prompt = create_editorial_prompt(i, concept, STYLE)
+        # Create prompt with all specifications
+        prompt = create_editorial_prompt(
+            i, concept, CANVAS, PALETTE, STYLE, TEXT_POLICY
+        )
 
         # Generate image
         success = generate_image(client, prompt, model_name, OUTPUT_DIR)
@@ -292,6 +321,7 @@ def main():
     print(f"  ✅ Successful: {successful}")
     print(f"  ❌ Failed: {failed}")
     print(f"\n  Images saved to: {OUTPUT_DIR}/")
+    print("  Format: 1:1 square, NO titles, minimal text")
     print("=" * 70 + "\n")
 
 

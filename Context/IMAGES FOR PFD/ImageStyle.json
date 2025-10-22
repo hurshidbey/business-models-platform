@@ -1,12 +1,17 @@
 {
-  "version": "1.0",
-  "visual_style": {
-    "palette": {
-      "background_hex": "#FFFFFF",
-      "primary_hex": "#000000",
-      "accent_hex": "#E3A900",
-      "secondary_hex": "#D9D9D9"
-    },
+  "version": "1.1",
+  "canvas": {
+    "background_hex": "#FFFFFF",
+    "aspect_ratio": "1:1",
+    "resolution": "2048x2048",
+    "padding_pct": 6
+  },
+  "palette": {
+    "primary_hex": "#000000",
+    "accent_hex": "#E3A900",
+    "neutral_hex": "#D9D9D9"
+  },
+  "style": {
     "shading": {
       "type": "flat_vector",
       "contrast": "medium",
@@ -15,24 +20,49 @@
     "halftone": {
       "enabled": true,
       "pattern_type": "dot_matrix",
+      "dot_min_px": 1,
+      "dot_max_px": 3,
+      "angle_deg": 45,
       "density": "medium",
-      "placement": "shadows_and_side_faces"
+      "tint_hex": "#D9D9D9",
+      "placement": ["side_faces", "shadow_regions"]
     },
     "lines": {
       "weight_px": 3,
       "style": "solid",
       "corner_type": "rounded",
-      "arrow_type": "filled_triangle"
+      "stroke_alignment": "center",
+      "arrow_type": "filled_triangle_small"
     },
     "composition": {
       "layout": "isometric_grid",
       "balance": "symmetrical_center_focus",
-      "object_depth": "minimal_3D"
+      "object_depth": "minimal_3D",
+      "spacing_pct": 5,
+      "central_anchor": true
     },
     "rendering": {
       "lighting": "flat_no_shadows",
       "finish": "matte",
-      "texture": "clean_vector"
+      "texture": "clean_vector",
+      "drop_shadows": false,
+      "gradients": false
     }
+  },
+  "text_policy": {
+    "allowed": "minimal",
+    "titles": false,
+    "subtitles": false,
+    "watermarks": false,
+    "max_characters_total": 20,
+    "placement_rules": [
+      "labels_only_on_tokens_or_arrows",
+      "no_text_on_background"
+    ],
+    "validate_spelling": true,
+    "check_accuracy": true,
+    "allowed_languages": "English",
+    "font_family_hint": "geometric_sans",
+    "font_weight": "medium"
   }
 }
