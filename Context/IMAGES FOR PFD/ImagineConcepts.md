@@ -78,7 +78,7 @@ A single strong trunk rises from the bottom (the core product), rendered in soli
 ## 8. Crowdfunding
 **Core Essence:** *Many small contributions manifest a singular vision*
 
-**Visual Metaphor:** The Cathedral Built by Hands
+**Visual Metaphor:** The Huge Building Built by Hands
 
 **Scene Description:**
 A magnificent structure rises in the center—half-built, transparent, showing its skeletal framework. Around its base, hundreds of tiny figures (the crowd) reach upward, each figure holding a small glowing brick, tile, or beam. As these offerings connect with the structure, they solidify and add to the growing edifice. Streams of light from each contributor converge on the central building, like rivers feeding a delta. A progress indicator—rendered as a ceremonial thermometer or filling vessel—shows the funding goal, currently three-quarters full. The background depicts a horizon line where dream meets reality: above the line, the completed vision rendered in ethereal blues and golds; below the line, the current state of construction in solid earth tones. Small reward tokens float back down to contributors like blessed gifts from the vision. The composition creates a sense of collective creation, democratic vision, and the power of aggregated small acts. Wide-angle view showing both the multitude below and the soaring structure above, emphasizing scale and collective action.
