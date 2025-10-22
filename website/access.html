@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifying Access - Business Models</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #F4E8D8;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nohemi', sans-serif;
+        }
+
+        .access-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 60px 40px;
+            background: white;
+            text-align: center;
+            box-shadow:
+                6px 6px 0px rgba(0, 0, 0, 1),
+                0 0 0 2px rgba(0, 0, 0, 1);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 30px;
+            border: 4px solid #F4E8D8;
+            border-top: 4px solid #1a1a1a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .access-container h1 {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 0em;
+            margin: 0 0 20px 0;
+            color: #1a1a1a;
+        }
+
+        .access-container p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin: 0 0 30px 0;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .error-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .access-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 2px solid #1a1a1a;
+        }
+
+        .access-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .support-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #F4E8D8;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .support-info a {
+            color: #1a1a1a;
+            text-decoration: underline;
+        }
+
+        #loading-state,
+        #success-state,
+        #error-state {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="access-container">
+        <!-- Loading State -->
+        <div id="loading-state">
+            <div class="spinner"></div>
+            <h1>Verifying Your Access...</h1>
+            <p>Please wait while we verify your access token.</p>
+        </div>
+
+        <!-- Success State -->
+        <div id="success-state">
+            <div class="success-icon">✓</div>
+            <h1>Access Granted!</h1>
+            <p>Welcome to Business Models. You now have lifetime access to all 60 business models and exclusive content.</p>
+            <p style="font-size: 16px; color: #666; margin-top: 30px;">Redirecting you to your dashboard in <span id="countdown">3</span> seconds...</p>
+            <a href="/app/home.html" class="access-button">Go to Dashboard Now →</a>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state">
+            <div class="error-icon">✗</div>
+            <h1>Invalid Access Token</h1>
+            <p>We couldn't verify your access token. This may happen if:</p>
+            <ul style="text-align: left; margin: 20px 40px; line-height: 1.8;">
+                <li>The link has expired or is invalid</li>
+                <li>You've already used this access link</li>
+                <li>There was a typo in the URL</li>
+            </ul>
+            <p style="margin-top: 30px;">Please check your email for the correct access link, or contact support if you continue to experience issues.</p>
+
+            <div class="support-info">
+                <p><strong>Need help?</strong></p>
+                <p>Email us at <a href="mailto:support@helpingbrain.com">support@helpingbrain.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include auth.js for token verification -->
+    <script src="auth.js"></script>
+
+    <script>
+        // Get token from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        // DOM elements
+        const loadingState = document.getElementById('loading-state');
+        const successState = document.getElementById('success-state');
+        const errorState = document.getElementById('error-state');
+
+        async function verifyAndGrantAccess() {
+            // Show loading state
+            loadingState.style.display = 'block';
+
+            // Check if token exists in URL
+            if (!token) {
+                showError();
+                return;
+            }
+
+            try {
+                // Verify token with backend API
+                const verification = await verifyAccessToken(token);
+
+                if (verification.valid) {
+                    // Store token in localStorage for future use
+                    setAccessToken(token);
+
+                    // Show success state
+                    showSuccess(verification.email);
+                } else {
+                    // Token is invalid
+                    showError();
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                showError();
+            }
+        }
+
+        function showSuccess(email) {
+            loadingState.style.display = 'none';
+            successState.style.display = 'block';
+
+            // Countdown and auto-redirect
+            let countdown = 3;
+            const countdownElement = document.getElementById('countdown');
+
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = '/app/home.html';
+                }
+            }, 1000);
+        }
+
+        function showError() {
+            loadingState.style.display = 'none';
+            errorState.style.display = 'block';
+        }
+
+        // Start verification when page loads
+        verifyAndGrantAccess();
+    </script>
+</body>
+</html>

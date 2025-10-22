@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard - Business Models</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <style>
+        body {
+            background-color: #F4E8D8;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nohemi', sans-serif;
+        }
+
+        /* Header */
+        .app-header {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0em;
+            margin: 0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-email {
+            font-size: 14px;
+            color: #F4E8D8;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid #F4E8D8;
+            color: #F4E8D8;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #F4E8D8;
+            color: #1a1a1a;
+        }
+
+        /* Welcome Section */
+        .welcome {
+            max-width: 1200px;
+            margin: 60px auto 40px;
+            padding: 0 40px;
+        }
+
+        .welcome h2 {
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: 0em;
+            margin: 0 0 20px 0;
+        }
+
+        .welcome p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin: 0 0 40px 0;
+        }
+
+        /* Navigation Cards */
+        .nav-cards {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .nav-card {
+            background: white;
+            padding: 40px;
+            box-shadow:
+                6px 6px 0px rgba(0, 0, 0, 1),
+                0 0 0 2px rgba(0, 0, 0, 1);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .nav-card:hover {
+            transform: translate(3px, 3px);
+            box-shadow:
+                3px 3px 0px rgba(0, 0, 0, 1),
+                0 0 0 2px rgba(0, 0, 0, 1);
+        }
+
+        .nav-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+        }
+
+        .nav-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            margin: 0;
+        }
+
+        .nav-card .arrow {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 40px;
+            background: white;
+            box-shadow:
+                6px 6px 0px rgba(0, 0, 0, 1),
+                0 0 0 2px rgba(0, 0, 0, 1);
+        }
+
+        .quick-stats h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0 0 30px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #F4E8D8;
+            border: 2px solid #1a1a1a;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 10px 0;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        .app-footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .app-footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .app-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .welcome {
+                padding: 0 20px;
+            }
+
+            .welcome h2 {
+                font-size: 32px;
+            }
+
+            .nav-cards {
+                padding: 0 20px;
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                margin: 0 20px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <h1>Business Models</h1>
+        <div class="user-info">
+            <span class="user-email" id="userEmail">Loading...</span>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+        <h2>Welcome Back!</h2>
+        <p>You now have lifetime access to all 60 business models, strategic frameworks, and exclusive content. Start exploring below.</p>
+    </section>
+
+    <!-- Navigation Cards -->
+    <section class="nav-cards">
+        <a href="../index-models-grid.html" class="nav-card">
+            <h3>60 Business Models</h3>
+            <p>Explore the complete collection of proven business model patterns with visual explanations and real-world examples.</p>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="../page-1-magic-triangle.html" class="nav-card">
+            <h3>Magic Triangle</h3>
+            <p>Master the four dimensions that define every successful business model: WHO, WHAT, HOW, and VALUE.</p>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="../page-2-kill-cash-cow.html" class="nav-card">
+            <h3>Kill Your Cash Cow</h3>
+            <p>Learn the four phases of business model innovation: Initiation, Ideation, Integration, and Implementation.</p>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="../page-3-90-percent-rule.html" class="nav-card">
+            <h3>The 90% Rule</h3>
+            <p>Apply proven strategies to transfer, combine, and leverage existing business model patterns.</p>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="../page-4-building-fortress.html" class="nav-card">
+            <h3>Building the Fortress</h3>
+            <p>Create defensible competitive advantages through strategic moats and barriers to entry.</p>
+            <span class="arrow">→</span>
+        </a>
+
+        <a href="../page-5-concept-to-cash.html" class="nav-card">
+            <h3>Concept to Cash</h3>
+            <p>Validate your business model before building with proven testing formats and methodologies.</p>
+            <span class="arrow">→</span>
+        </a>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats" style="margin: 0 40px 60px;">
+        <h3>Your Access</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">60</div>
+                <div class="stat-label">Business Models</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Strategic Frameworks</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Lifetime Access</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$49</div>
+                <div class="stat-label">One-Time Payment</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>&copy; 2025 Business Models. Need help? <a href="mailto:support@helpingbrain.com" style="color: #F4E8D8;">support@helpingbrain.com</a></p>
+    </footer>
+
+    <!-- Include auth.js -->
+    <script src="../auth.js"></script>
+
+    <script>
+        // Require authentication to access this page
+        async function checkAuth() {
+            const isAuthenticated = await requireAuth();
+
+            if (isAuthenticated) {
+                // Load user info
+                loadUserInfo();
+            }
+        }
+
+        async function loadUserInfo() {
+            try {
+                const userInfo = await getUserInfo();
+
+                if (userInfo && userInfo.email) {
+                    document.getElementById('userEmail').textContent = userInfo.email;
+                }
+            } catch (error) {
+                console.error('Error loading user info:', error);
+                document.getElementById('userEmail').textContent = 'User';
+            }
+        }
+
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout? You can always log back in with your access link.')) {
+                logout();
+            }
+        }
+
+        // Check authentication when page loads
+        checkAuth();
+    </script>
+</body>
+</html>

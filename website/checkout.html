@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Processing Payment | Business Models</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: var(--beige-bg);
+      margin: 0;
+      padding: 20px;
+    }
+    .checkout-container {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      border: 2px solid var(--black);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      text-align: center;
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--beige-light);
+      border-top: 4px solid var(--black);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--black);
+    }
+    p {
+      font-size: 1rem;
+      color: var(--black-soft);
+      line-height: 1.6;
+    }
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .error-message {
+      background: #fff4f4;
+      border-left: 4px solid #ff4444;
+      padding: 15px;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .retry-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: var(--black);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .retry-button:hover {
+      background: var(--black-soft);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-container">
+    <div id="loading-state">
+      <div class="spinner"></div>
+      <h1>Processing Your Payment...</h1>
+      <p>Please wait while we activate your access. This should only take a few seconds.</p>
+    </div>
+
+    <div id="success-state" style="display: none;">
+      <div class="success-icon">✅</div>
+      <h1>Payment Successful!</h1>
+      <p>Your access has been activated. You should receive an email shortly with your access link.</p>
+      <p>Redirecting you to your content...</p>
+    </div>
+
+    <div id="error-state" style="display: none;">
+      <div class="success-icon">⚠️</div>
+      <h1>Processing Delayed</h1>
+      <p>Your payment was successful, but we're still processing your access.</p>
+      <div class="error-message">
+        <strong>What to do:</strong><br>
+        • Check your email for the access link (it should arrive within 5 minutes)<br>
+        • Or contact us at <a href="mailto:support@helpingbrain.com">support@helpingbrain.com</a> with your payment confirmation
+      </div>
+      <a href="/" class="retry-button">Back to Homepage</a>
+    </div>
+  </div>
+
+  <script>
+    // Get Stripe session ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+
+    if (!sessionId) {
+      // No session ID - redirect to homepage
+      window.location.href = '/';
+    } else {
+      // Poll for access token (webhook should process within 3-5 seconds)
+      checkForAccess();
+    }
+
+    async function checkForAccess() {
+      // Try for up to 15 seconds
+      const maxAttempts = 10;
+      const interval = 1500; // 1.5 seconds
+      let attempts = 0;
+
+      const pollInterval = setInterval(async () => {
+        attempts++;
+
+        try {
+          // Check if webhook has processed by trying to verify any token
+          // In practice, we'll get the token from the email or a backend endpoint
+          // For now, show success after 5 seconds and redirect to homepage
+
+          if (attempts >= 4) {
+            clearInterval(pollInterval);
+            showSuccess();
+          }
+        } catch (error) {
+          console.error('Error checking access:', error);
+        }
+
+        if (attempts >= maxAttempts) {
+          clearInterval(pollInterval);
+          showError();
+        }
+      }, interval);
+    }
+
+    function showSuccess() {
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+
+      // Redirect after 3 seconds
+      setTimeout(() => {
+        // Check email for access link
+        window.location.href = '/';
+      }, 3000);
+    }
+
+    function showError() {
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('error-state').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Robots.txt for helpingbrain.com
+# Business Models - 60 Proven Revenue Strategies
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /page-1-magic-triangle.html
+Allow: /page-2-kill-cash-cow.html
+Allow: /page-3-90-percent-rule.html
+Allow: /page-4-building-fortress.html
+Allow: /page-5-concept-to-cash.html
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Disallow protected app pages (require authentication)
+Disallow: /app/
+Disallow: /access.html
+Disallow: /checkout.html
+Disallow: /index-models-grid.html
+
+# Disallow backend API
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://helpingbrain.com/sitemap.xml
