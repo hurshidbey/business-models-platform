@@ -1,0 +1,42 @@
+{
+  "business_model_diagram_template": {
+    "model_name": "",
+    "core_concept": "",
+    "key_relationships": [],
+    "visual_metaphor": "",
+
+    "style_constants": {
+      "background": "dark charcoal gray #2a2a2a",
+      "primary_color": "white #ffffff",
+      "accent_color": "cyan/teal #00d9b5",
+      "secondary_color": "medium gray #666666",
+      "aesthetic": "minimalist, geometric, professional, clean lines, generous whitespace"
+    },
+
+    "visual_structure": {
+      "type": "",
+      "options": [
+        "layered_progression",
+        "core_with_satellites",
+        "funnel_flow",
+        "venn_overlap",
+        "matrix_grid",
+        "hierarchical_tree",
+        "proportional_shapes",
+        "distribution_curves",
+        "flow_diagram",
+        "concentric_circles"
+      ]
+    },
+
+    "elements": {
+      "shapes": [],
+      "icons": [],
+      "arrows": [],
+      "labels": [],
+      "highlights": []
+    },
+
+    "image_prompt": ""
+  }
+}

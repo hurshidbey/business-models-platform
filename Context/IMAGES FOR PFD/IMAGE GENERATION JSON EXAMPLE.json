@@ -1,0 +1,48 @@
+{
+  "business_model_diagram_template": {
+    "model_name": "Add-On",
+    "core_concept": "Low-priced core product surrounded by premium optional extras",
+    "key_relationships": [
+      "core product at center",
+      "multiple add-ons surrounding",
+      "increasing price tiers"
+    ],
+    "visual_metaphor": "central core with radiating premium options",
+
+    "style_constants": {
+      "background": "dark charcoal gray #2a2a2a",
+      "primary_color": "white #ffffff",
+      "accent_color": "cyan/teal #00d9b5",
+      "secondary_color": "medium gray #666666",
+      "aesthetic": "minimalist, geometric, professional, clean lines, generous whitespace"
+    },
+
+    "visual_structure": {
+      "type": "core_with_satellites",
+      "description": "central element with connected peripheral elements showing upgrades"
+    },
+
+    "elements": {
+      "shapes": [
+        "central circle/square for core product",
+        "6-8 smaller rectangles/circles around it for add-ons"
+      ],
+      "icons": ["price tag symbol in center", "plus symbols on connections"],
+      "arrows": [
+        "lines connecting core to add-ons",
+        "subtle arrows showing upgrade path"
+      ],
+      "labels": [
+        "Core Product (center)",
+        "Add-On 1, Add-On 2, etc. (periphery)",
+        "$ symbols showing price increase"
+      ],
+      "highlights": [
+        "core product in white outline",
+        "add-ons in cyan accent color"
+      ]
+    },
+
+    "image_prompt": "minimalist business diagram on dark charcoal background, central white circle labeled 'Core Product' with dollar sign, 6-8 cyan rectangular boxes arranged in circle around it connected by thin white lines, each box labeled 'Add-On' with increasing price symbols, clean geometric layout, professional style, generous spacing, simple icons, white and cyan color scheme"
+  }
+}
