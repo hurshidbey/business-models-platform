@@ -1,0 +1,291 @@
+{
+  "version": "1.0",
+  "purpose": "Consistent, minimal, line-art diagrams for 60 business models",
+  "style_constants": {
+    "canvas": {
+      "background_hex": "#0F1115",
+      "padding_pct": 8,
+      "aspect_ratio": "16:9",
+      "resolution": "2048x1152"
+    },
+    "palette": {
+      "base_hex": "#E8E8E8",
+      "muted_hex": "#6A6F78",
+      "accent_hex": "#19E58F"
+    },
+    "strokes": {
+      "base_px": 3,
+      "accent_px": 4,
+      "rounded_corners": true,
+      "arrow_style": "simple_solid",
+      "arrow_head": "triangle_small"
+    },
+    "rendering": {
+      "lighting": "flat",
+      "shadows": "subtle_soft",
+      "finish": "matte",
+      "texture": "clean_vector",
+      "style_notes": [
+        "no gradients",
+        "no 3D",
+        "no photos",
+        "thin halftone allowed sparingly"
+      ]
+    },
+    "typography_labels": {
+      "allow_text_labels": false,
+      "fallback": "if labels are essential, use 1–3 tiny tags only"
+    },
+    "global_rules": [
+      "single focal idea",
+      "lots of negative space",
+      "uniform stroke widths",
+      "consistent icon language",
+      "use accent color only for the key mechanism"
+    ],
+    "negative_prompts": [
+      "no logos",
+      "no watermarks",
+      "no UI chrome",
+      "no people photos",
+      "no paragraphs of text"
+    ]
+  },
+
+  "visual_structures": {
+    "grid_diffusion": {
+      "description": "Uniform grid of small icons; a few items highlighted step-by-step with rightward arrows.",
+      "good_for": ["network effects", "viral adoption", "rollouts"],
+      "slots": ["grid_icon", "steps", "highlight_count"]
+    },
+    "funnel_bottleneck": {
+      "description": "Multiple inputs converge; one central bottleneck or decision gate; side outputs optional.",
+      "good_for": ["conversion flow", "procurement", "priority trade-offs"],
+      "slots": ["inputs", "gate_symbol", "outputs"]
+    },
+    "venn_focus": {
+      "description": "Two or three overlaps; narrow almond-shaped focus highlighted.",
+      "good_for": ["focus of control vs concern", "trade-offs"],
+      "slots": ["circles", "focus_label"]
+    },
+    "distribution_shift": {
+      "description": "Two bell curves; observation dot forces shift to a new curve.",
+      "good_for": ["assumption update", "evidence-driven change"],
+      "slots": ["old_curve", "new_curve", "observation_dot"]
+    },
+    "spotlight_vs_core": {
+      "description": "Narrow spotlight (personality, promotion) on left; irregular core mass (character, capability) on right.",
+      "good_for": ["surface vs substance", "brand vs ops"],
+      "slots": ["spotlight_arc", "core_shape"]
+    },
+    "hub_with_addons": {
+      "description": "Solid core block at center with detachable modules (pills or tiles) around it; accent shows paid add-ons.",
+      "good_for": ["add-on pricing", "modular upsells", "plug-ins"],
+      "slots": ["core_block", "addon_modules", "pricing_arrows"]
+    },
+    "flywheel": {
+      "description": "Circular arrows reinforcing motion; accent on the force injector.",
+      "good_for": ["compounding loops", "retention engines"],
+      "slots": ["segments", "force_point"]
+    },
+    "two_sided_market": {
+      "description": "Left and right groups feed a central platform; cross-arrows indicate value exchange.",
+      "good_for": ["marketplaces", "platforms"],
+      "slots": ["side_A_icons", "side_B_icons", "platform_core"]
+    },
+    "layered_stack": {
+      "description": "Stacked layers with optional side modules; accent highlights monetized layer.",
+      "good_for": ["bundles", "tech stacks", "tiering"],
+      "slots": ["layers", "side_modules"]
+    }
+  },
+
+  "template": {
+    "model_name": "<Title of the business model>",
+    "core_concept": "<One sentence essence>",
+    "key_relationships": [
+      "<Flow or dependency 1>",
+      "<Flow or dependency 2>",
+      "<Flow or dependency 3>"
+    ],
+    "visual_metaphor": {
+      "structure_id": "<choose from visual_structures keys>",
+      "rationale": "<Why this fits the concept>"
+    },
+    "elements": {
+      "core": {
+        "shape": "rounded_rect",
+        "size": "medium",
+        "fill": "none",
+        "stroke": "base"
+      },
+      "modules": [
+        {
+          "name": "<module or option>",
+          "shape": "pill",
+          "placement": "ring",
+          "highlight": "accent_if_paid",
+          "icon_hint": "<simple icon idea, e.g., baggage, seat, software>"
+        }
+      ],
+      "arrows": [
+        {
+          "from": "<source_id>",
+          "to": "<target_id>",
+          "thickness": "base|accent",
+          "meaning": "<pricing flow|value flow|decision>"
+        }
+      ],
+      "emphasis": {
+        "rule": "use accent only on monetized options and revenue arrows",
+        "count_limit": 6
+      },
+      "legend": {
+        "use_minimal_markers": true,
+        "markers": [
+          { "marker": "solid accent pill = paid add-on" },
+          { "marker": "hollow pill = optional free/basic" }
+        ]
+      }
+    },
+    "image_prompt": {
+      "system": "Create a clean vector diagram on a dark canvas that follows style_constants.",
+      "structure": "Use the selected visual_structures.<structure_id> layout.",
+      "content": "Draw the core and modules per elements; show flows with arrows; highlight only the monetized parts with the accent color.",
+      "composition": "Centered layout, generous negative space, consistent stroke widths, no text unless tiny markers are essential.",
+      "aesthetics": "Flat matte, no gradients, subtle soft shadow, uniform icon language.",
+      "negatives": "Exclude logos, watermarks, UI, photographs, and long text."
+    }
+  },
+
+  "example_filled": {
+    "model_name": "Add-On",
+    "core_concept": "Sell a low-priced core, then monetize high-margin optional features the customer selects.",
+    "key_relationships": [
+      "Core purchase unlocks menu of optional modules",
+      "Customer selects subset of modules",
+      "Revenue concentrates in paid add-ons, not the core"
+    ],
+    "visual_metaphor": {
+      "structure_id": "hub_with_addons",
+      "rationale": "A central core with detachable modules makes the upsell mechanism obvious."
+    },
+    "elements": {
+      "core": {
+        "id": "core_product",
+        "shape": "rounded_rect",
+        "size": "large",
+        "fill": "none",
+        "stroke": "base",
+        "badge": "tiny hollow tag to imply 'low price' without text"
+      },
+      "modules": [
+        {
+          "id": "addon_baggage",
+          "shape": "pill",
+          "placement": "ring_top_left",
+          "highlight": "accent",
+          "icon_hint": "briefcase"
+        },
+        {
+          "id": "addon_meals",
+          "shape": "pill",
+          "placement": "ring_top_right",
+          "highlight": "accent",
+          "icon_hint": "tray"
+        },
+        {
+          "id": "addon_priority",
+          "shape": "pill",
+          "placement": "ring_right",
+          "highlight": "accent",
+          "icon_hint": "arrow_up"
+        },
+        {
+          "id": "addon_insurance",
+          "shape": "pill",
+          "placement": "ring_bottom_right",
+          "highlight": "accent",
+          "icon_hint": "shield"
+        },
+        {
+          "id": "addon_seat",
+          "shape": "pill",
+          "placement": "ring_bottom_left",
+          "highlight": "accent",
+          "icon_hint": "seat"
+        },
+        {
+          "id": "addon_wifi",
+          "shape": "pill",
+          "placement": "ring_left",
+          "highlight": "accent",
+          "icon_hint": "wifi"
+        }
+      ],
+      "arrows": [
+        {
+          "from": "customer_icon_left",
+          "to": "core_product",
+          "thickness": "base",
+          "meaning": "basic purchase"
+        },
+        {
+          "from": "core_product",
+          "to": "addon_baggage",
+          "thickness": "accent",
+          "meaning": "upsell path"
+        },
+        {
+          "from": "core_product",
+          "to": "addon_meals",
+          "thickness": "accent",
+          "meaning": "upsell path"
+        },
+        {
+          "from": "core_product",
+          "to": "addon_priority",
+          "thickness": "accent",
+          "meaning": "upsell path"
+        },
+        {
+          "from": "core_product",
+          "to": "addon_insurance",
+          "thickness": "accent",
+          "meaning": "upsell path"
+        },
+        {
+          "from": "core_product",
+          "to": "addon_seat",
+          "thickness": "accent",
+          "meaning": "upsell path"
+        },
+        {
+          "from": "core_product",
+          "to": "addon_wifi",
+          "thickness": "accent",
+          "meaning": "upsell path"
+        }
+      ],
+      "emphasis": {
+        "rule": "accent only on paid modules and the revenue arrows",
+        "count_limit": 8
+      },
+      "legend": {
+        "use_minimal_markers": true,
+        "markers": [
+          { "marker": "hollow core rectangle = low-priced base" },
+          { "marker": "solid accent pills = paid add-ons" }
+        ]
+      }
+    },
+    "image_prompt": {
+      "system": "Minimal vector diagram, dark background, clean line art, consistent with style_constants.",
+      "structure": "Use hub_with_addons: a large hollow rounded rectangle at center as the core; six pill-shaped modules arranged in a loose ring around it.",
+      "content": "Add a tiny neutral customer icon to the left feeding the core with a base arrow. From the core, draw accent arrows to each add-on module. Keep modules evenly spaced; use accent fill on modules and accent stroke on upsell arrows.",
+      "composition": "Center the core; maintain wide negative space; keep stroke base_px for neutral lines and accent_px for revenue flows; avoid any text except tiny legend markers if necessary.",
+      "aesthetics": "Flat matte, subtle soft shadow under core and modules, no gradients, no 3D.",
+      "negatives": "No brand logos, no watermarks, no long labels, no UI mockups, no photographs."
+    }
+  }
+}
