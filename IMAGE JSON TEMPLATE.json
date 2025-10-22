@@ -1,0 +1,46 @@
+{
+  "style_template": {
+    "name": "Editorial Minimalist Illustration",
+    "inspiration": "Modern magazine editorial art style",
+    "mood": "Professional, conceptual, thought-provoking",
+    "color_palette": {
+      "primary_colors": ["#D44C4C", "#1E2B47", "#8AB2B8"],
+      "secondary_colors": ["#E8E8E8", "#F2F0EC", "#B5B5B5"],
+      "accent_colors": ["#FFFFFF", "#000000"],
+      "texture_treatment": "Subtle halftone grain overlay for depth"
+    },
+    "composition": {
+      "layout": "Flat, minimalist composition with clear focal subject",
+      "perspective": "Slight isometric or side view, emphasizing narrative over realism",
+      "balance": "Symmetrical or slightly offset to create tension",
+      "background": "Muted, single-color or gradient background with light grain"
+    },
+    "illustration_technique": {
+      "line_style": "Clean edges, no outlines or very soft outlines",
+      "shading": "Flat color blocks with minimal gradient or shadow",
+      "texture": "Soft halftone dots or grainy overlay for analog feel",
+      "lighting": "Even, diffused light—no strong highlights or deep shadows"
+    },
+    "subjects_and_motion": {
+      "character_style": "Simplified human figures, geometric proportions, limited facial detail",
+      "motion": "Static or symbolic movement (e.g., walking, stacking, racing)",
+      "props": "Common everyday or business-related items illustrated simply"
+    },
+    "overall_tone": {
+      "emotional_feel": "Calm yet ironic or analytical",
+      "intended_use": "Editorial, business storytelling, conceptual infographics"
+    },
+    "text_policy": {
+      "rule": "ABSOLUTELY NO TEXT OR LABELS",
+      "restrictions": [
+        "No words, letters, or numbers anywhere in the image",
+        "No titles, captions, or annotations",
+        "No text on objects, signs, or props",
+        "Communicate the concept purely through visual metaphors and illustration",
+        "The image must be 100% visual storytelling without any written language"
+      ],
+      "emphasis": "CRITICAL: This is a pure illustration with ZERO text elements"
+    },
+    "concept": "[Replace this text with your own idea or theme — e.g., 'The illusion of productivity', 'AI replacing jobs', 'Value of education in digital age']"
+  }
+}

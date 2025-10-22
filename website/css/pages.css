@@ -1,0 +1,559 @@
+/* ===================================
+   Additional Styles for Content Pages
+   =================================== */
+
+/* Logo Link */
+.logo-link {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+}
+
+/* Page Navigation */
+.page-nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.page-nav a {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--black-soft);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.page-nav a:hover,
+.page-nav a.active {
+    background-color: var(--black);
+    color: var(--white);
+    opacity: 1;
+}
+
+/* Hero Section */
+.page-hero {
+    background: linear-gradient(
+        135deg,
+        var(--beige-light) 0%,
+        var(--beige-bg) 100%
+    );
+    padding: 4rem 0 3rem;
+    text-align: center;
+    border-bottom: 2px solid var(--beige-dark);
+}
+
+.hero-badge {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--black-soft);
+    padding: 0.5rem 1rem;
+    background-color: var(--white);
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--black-soft);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Page Content */
+.page-content {
+    padding: 4rem 0;
+}
+
+.content-section {
+    margin-bottom: 4rem;
+}
+
+.content-section:last-child {
+    margin-bottom: 0;
+}
+
+.lead-text {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--black-soft);
+    margin-bottom: 2rem;
+}
+
+.big-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+/* Callout Boxes */
+.callout-box {
+    padding: 2rem;
+    border-radius: 0;
+    margin: 2rem 0;
+    border: 2px solid var(--black);
+    background-color: var(--white);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+/* Halftone shadow effect */
+.callout-box::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: -6px;
+    bottom: -6px;
+    background-image: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0.4) 1px,
+        transparent 1px
+    );
+    background-size: 4px 4px;
+    z-index: -1;
+    border-radius: 0;
+}
+
+.callout-box h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Remove color variants - all use same style */
+.callout-box.danger,
+.callout-box.success,
+.callout-box.info,
+.callout-box.warning {
+    background-color: var(--white);
+    border: 2px solid var(--black);
+}
+
+/* Pillars Grid */
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.pillar-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px var(--shadow-light);
+    transition: var(--transition);
+    position: relative;
+}
+
+.pillar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--shadow-medium);
+}
+
+.pillar-number {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.pillar-card h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+}
+
+.pillar-subtitle {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--black-soft);
+    margin-top: 0.25rem;
+}
+
+.action-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--beige-light);
+    border-radius: 4px;
+    font-size: 0.9375rem;
+    font-style: italic;
+    color: var(--black-soft);
+}
+
+/* Case Study */
+.case-study {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px var(--shadow-light);
+    margin: 2rem 0;
+}
+
+.case-study h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--black);
+}
+
+.case-study-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    align-items: center;
+}
+
+.case-before,
+.case-after {
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.case-before {
+    background-color: #fff4f4;
+}
+
+.case-after {
+    background-color: #f0f9f4;
+}
+
+.case-before h4,
+.case-after h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.case-before p,
+.case-after p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.case-before p:last-child,
+.case-after p:last-child {
+    margin-bottom: 0;
+}
+
+.case-arrow {
+    font-size: 3rem;
+    color: var(--black);
+    font-weight: 700;
+}
+
+.case-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--beige-light);
+    border-radius: 4px;
+    font-size: 1.0625rem;
+}
+
+/* Key Takeaway */
+.key-takeaway {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: var(--white);
+    padding: 2.5rem;
+    border-radius: 8px;
+    margin: 3rem 0;
+}
+
+.key-takeaway h3 {
+    color: var(--white);
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.key-takeaway p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Page Bottom Navigation */
+.page-bottom-nav {
+    padding: 3rem 0;
+    background-color: var(--beige-light);
+    border-top: 2px solid var(--beige-dark);
+}
+
+.page-bottom-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: var(--transition);
+    font-size: 1.0625rem;
+}
+
+.nav-btn.primary {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.nav-btn.primary:hover {
+    background-color: var(--black-soft);
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+.nav-btn.secondary {
+    background-color: transparent;
+    color: var(--black);
+    border: 2px solid var(--black);
+}
+
+.nav-btn.secondary:hover {
+    background-color: var(--black);
+    color: var(--white);
+    opacity: 1;
+    transform: translateX(-4px);
+}
+
+/* Lists */
+.content-section ul,
+.content-section ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.content-section li {
+    margin-bottom: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+}
+
+.content-section li strong {
+    font-weight: 700;
+    color: var(--black);
+}
+
+/* Quotes */
+.quote-block {
+    border-left: 4px solid var(--black);
+    padding-left: 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--black-soft);
+}
+
+.quote-author {
+    display: block;
+    margin-top: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--black);
+}
+
+/* Business Model Tables */
+.bm-table-container {
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.bm-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--white);
+    border: 2px solid var(--black);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.bm-table::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: -8px;
+    bottom: -8px;
+    background-image: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0.4) 1px,
+        transparent 1px
+    );
+    background-size: 4px 4px;
+    z-index: -1;
+}
+
+.bm-table thead th {
+    background: var(--black);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-right: 2px solid var(--white);
+}
+
+.bm-table thead th:last-child {
+    border-right: none;
+}
+
+.bm-table tbody td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--beige-dark);
+    border-right: 1px solid var(--beige-dark);
+    vertical-align: top;
+    line-height: 1.7;
+}
+
+.bm-table tbody td:last-child {
+    border-right: none;
+}
+
+.bm-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.bm-table tbody tr:nth-child(even) {
+    background: var(--beige-light);
+}
+
+.bm-table strong {
+    color: var(--black);
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bm-table-container {
+        margin: 1.5rem -1rem;
+    }
+
+    .bm-table {
+        font-size: 0.875rem;
+    }
+
+    .bm-table thead th,
+    .bm-table tbody td {
+        padding: 0.75rem 1rem;
+    }
+
+    .hero-illustration {
+        max-width: 100%;
+        margin: 1.5rem auto;
+    }
+
+    .section-illustration,
+    .section-illustration.float-right,
+    .section-illustration.float-left {
+        float: none;
+        max-width: 100%;
+        margin: 1.5rem auto;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.0625rem;
+    }
+
+    .page-nav {
+        gap: 0.5rem;
+    }
+
+    .page-nav a {
+        font-size: 0.875rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .case-study-content {
+        grid-template-columns: 1fr;
+    }
+
+    .case-arrow {
+        transform: rotate(90deg);
+        font-size: 2rem;
+    }
+
+    .page-bottom-nav .container {
+        flex-direction: column;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .big-text {
+        font-size: 1.25rem;
+    }
+
+    .lead-text {
+        font-size: 1.0625rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .page-content {
+        padding: 2rem 0;
+    }
+
+    .content-section {
+        margin-bottom: 2.5rem;
+    }
+
+    .pillar-card,
+    .case-study,
+    .key-takeaway {
+        padding: 1.5rem;
+    }
+}
